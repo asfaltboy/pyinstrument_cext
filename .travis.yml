@@ -12,17 +12,16 @@ matrix:
 
 env:
   global:
-    - CIBW_SKIP=pp*
     - CIBW_TEST_REQUIRES=nose
     - CIBW_TEST_COMMAND="nosetests {project}/tests"
-    # - TWINE_USERNAME=joerick
+    - TWINE_USERNAME=joerick
     # Note: TWINE_PASSWORD is set in Travis settings
 
 script:
-  - $PIP install cibuildwheel
+  - $PIP install https://github.com/joerick/cibuildwheel/archive/master.zip
   - cibuildwheel --output-dir wheelhouse
   - |
     if [[ $TRAVIS_TAG ]]; then
       python -m pip install twine
-      python -m twine upload --repository testpypi wheelhouse/*.whl
+      python -m twine upload wheelhouse/*.whl
     fi
