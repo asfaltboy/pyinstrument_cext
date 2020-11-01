@@ -3,7 +3,7 @@ environment:
     CIBW_SKIP: pp*
     CIBW_TEST_REQUIRES: nose
     CIBW_TEST_COMMAND: "nosetests {project}\\tests"
-    TWINE_USERNAME: joerick
+    TWINE_USERNAME: asfaltboy
     # Note: TWINE_PASSWORD is set in Appveyor settings
 
 init:
@@ -15,7 +15,7 @@ build_script:
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true") {
         python -m pip install --disable-pip-version-check twine
-        python -m twine upload (resolve-path wheelhouse\*.whl)
+        python -m twine upload --repository testpypi (resolve-path wheelhouse\*.whl)
       }
 
 artifacts:
