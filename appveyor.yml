@@ -6,8 +6,11 @@ environment:
     TWINE_USERNAME: joerick
     # Note: TWINE_PASSWORD is set in Appveyor settings
 
+init:
+- set PATH=C:\Python38;C:\Python38\Scripts;%PATH%
+
 build_script:
-  - pip install cibuildwheel
+  - python -m pip install cibuildwheel
   - cibuildwheel --output-dir wheelhouse
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true") {
