@@ -14,7 +14,7 @@ build_script:
   - cibuildwheel --output-dir wheelhouse
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true") {
-        python -m pip install twine
+        python -m pip install --disable-pip-version-check twine
         python -m twine upload (resolve-path wheelhouse\*.whl)
       }
 
